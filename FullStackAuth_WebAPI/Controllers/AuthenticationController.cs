@@ -16,6 +16,7 @@ namespace FullStackAuth_WebAPI.Controllers
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
         private readonly IAuthenticationManager _authManager;
+
         public AuthenticationController(IMapper mapper, UserManager<User> userManager, IAuthenticationManager authManager)
         {
             _mapper = mapper;
@@ -27,10 +28,10 @@ namespace FullStackAuth_WebAPI.Controllers
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> RegisterUser([FromBody] UserForRegistrationDto userForRegistration)
         {
-
             var user = _mapper.Map<User>(userForRegistration);
 
             var result = await _userManager.CreateAsync(user, userForRegistration.Password);
+
             if (!result.Succeeded)
             {
                 foreach (var error in result.Errors)
@@ -39,15 +40,21 @@ namespace FullStackAuth_WebAPI.Controllers
                 }
                 return BadRequest(ModelState);
             }
-            await _userManager.AddToRoleAsync(user, "USER");
+
+            // Assign the user to a role based on whether they are a store owner or not
+            string role = user.IsStoreOwner ? "STOREOWNER" : "HOMEOWNER";
+            await _userManager.AddToRoleAsync(user, role);
 
             UserForDisplayDto createdUser = new UserForDisplayDto
             {
-                Id = user.Id,
-                UserName = user.UserName,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
+                UserName = user.UserName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                IsStoreOwner = user.IsStoreOwner
             };
+
             return StatusCode(201, createdUser);
         }
 

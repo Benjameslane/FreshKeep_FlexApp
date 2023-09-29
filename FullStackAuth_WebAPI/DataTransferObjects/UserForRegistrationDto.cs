@@ -1,18 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace FullStackAuth_WebAPI.DataTransferObjects
+﻿public class UserForRegistrationDto
 {
-    public class UserForRegistrationDto
-    {
-        //DTO used when registering
-        public string FirstName { get; set; }
-        public string UserType{ get; set; }
-        public string LastName { get; set; }
-        [Required(ErrorMessage = "Username is required.")]
-        public string UserName { get; set; }
-        [Required(ErrorMessage = "Password is required.")]
-        public string Password { get; set; }
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
-    }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string UserName { get; set; }
+    public string Password { get; set; }
+    public string Email { get; set; }
+    public string PhoneNumber { get; set; }
+    public bool IsStoreOwner { get; set; }  // true = StoreOwner, false = HomeOwner
 }

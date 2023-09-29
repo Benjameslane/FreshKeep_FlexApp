@@ -41,9 +41,7 @@ namespace FullStackAuth_WebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            // Assign the user to a role based on whether they are a store owner or not
-            string role = user.IsStoreOwner ? "STOREOWNER" : "HOMEOWNER";
-            await _userManager.AddToRoleAsync(user, role);
+           
 
             UserForDisplayDto createdUser = new UserForDisplayDto
             {

@@ -8,6 +8,11 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Net.Http;
+using RestSharp;
+using Newtonsoft.Json;
+
 
 namespace FullStackAuth_WebAPI
 {
@@ -15,7 +20,11 @@ namespace FullStackAuth_WebAPI
     {
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
+
+        
+        
+    var builder = WebApplication.CreateBuilder(args);
+
 
             // Add services to the container.
             builder.Services.ConfigureCors();
@@ -27,10 +36,21 @@ namespace FullStackAuth_WebAPI
             builder.Services.ConfigureJWT(builder.Configuration);
             builder.Services.AddScoped<IAuthenticationManager, AuthenticationManager>();
             builder.Services.AddControllers();
+            builder.Services.AddTransient<UPCLookupService>();
+            
+
+
+
+            //added the above syntax from online resource to eliminate 500 error in postman
+
+
+
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddHttpClient();
+            
 
             var app = builder.Build();
 

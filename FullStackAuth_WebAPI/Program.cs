@@ -37,7 +37,9 @@ namespace FullStackAuth_WebAPI
             builder.Services.AddScoped<IAuthenticationManager, AuthenticationManager>();
             builder.Services.AddControllers();
             builder.Services.AddTransient<UPCLookupService>();
-            
+            builder.Services.AddTransient<GooglePlacesService>();
+
+
 
 
 

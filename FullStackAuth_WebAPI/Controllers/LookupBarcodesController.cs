@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq; // Import this namespace
+using Newtonsoft.Json.Linq; 
 using FullStackAuth_WebAPI.DataTransferObjects;
 
 namespace FullStackAuth_WebAPI.Controllers

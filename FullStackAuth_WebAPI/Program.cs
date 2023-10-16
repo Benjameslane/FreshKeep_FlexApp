@@ -38,7 +38,10 @@ namespace FullStackAuth_WebAPI
             builder.Services.AddControllers();
             builder.Services.AddTransient<UPCLookupService>();
             builder.Services.AddTransient<GooglePlacesService>();
+            // builder.Services.AddScoped<SpoonacularService>();
+            string spoonacularApiKey ="4cb8d788dff14192aeeb7619916f5365";
 
+            builder.Services.AddScoped(provider => new SpoonacularService(spoonacularApiKey));
 
 
 

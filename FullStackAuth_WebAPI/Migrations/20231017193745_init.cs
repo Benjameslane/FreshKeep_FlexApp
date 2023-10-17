@@ -39,6 +39,7 @@ namespace FullStackAuth_WebAPI.Migrations
                     Id = table.Column<string>(type: "varchar(255)", nullable: false),
                     FirstName = table.Column<string>(type: "longtext", nullable: true),
                     LastName = table.Column<string>(type: "longtext", nullable: true),
+                    IsStoreOwner = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true),
@@ -57,6 +58,42 @@ namespace FullStackAuth_WebAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "DiscountedItems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "longtext", nullable: true),
+                    ExpirationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    OriginalPrice = table.Column<double>(type: "double", nullable: false),
+                    DiscountedPrice = table.Column<double>(type: "double", nullable: false),
+                    DiscountAmount = table.Column<double>(type: "double", nullable: false),
+                    StoreOwnerId = table.Column<string>(type: "longtext", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DiscountedItems", x => x.Id);
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "UserFoodItems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "longtext", nullable: true),
+                    ExpirationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UserId = table.Column<string>(type: "longtext", nullable: true),
+                    IsGroceryItem = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserFoodItems", x => x.Id);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
@@ -198,8 +235,8 @@ namespace FullStackAuth_WebAPI.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "02826bcd-2b15-4c0a-8d85-281ade12b9b9", null, "Admin", "ADMIN" },
-                    { "59de2413-2986-49fa-a7ea-d2ee9bae8830", null, "User", "USER" }
+                    { "8a62e6ca-452c-4eb9-9587-1c1864861e0d", null, "Admin", "ADMIN" },
+                    { "e5f04f94-0ab6-4456-aa99-bac9e79345ca", null, "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -265,6 +302,12 @@ namespace FullStackAuth_WebAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "Cars");
+
+            migrationBuilder.DropTable(
+                name: "DiscountedItems");
+
+            migrationBuilder.DropTable(
+                name: "UserFoodItems");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

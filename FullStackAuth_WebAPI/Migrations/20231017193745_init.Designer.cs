@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FullStackAuth_WebAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231017190134_AddDiscountedItemsTable")]
-    partial class AddDiscountedItemsTable
+    [Migration("20231017193745_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -129,13 +129,13 @@ namespace FullStackAuth_WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2a8afb44-28f1-42c2-a654-5b5d53070f22",
+                            Id = "e5f04f94-0ab6-4456-aa99-bac9e79345ca",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "4aa0719f-0a2a-4a1f-a07f-6728f02e0169",
+                            Id = "8a62e6ca-452c-4eb9-9587-1c1864861e0d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

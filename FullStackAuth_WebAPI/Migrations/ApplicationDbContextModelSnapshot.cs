@@ -46,6 +46,35 @@ namespace FullStackAuth_WebAPI.Migrations
                     b.ToTable("Cars");
                 });
 
+            modelBuilder.Entity("FullStackAuth_WebAPI.Models.DiscountedItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<double>("DiscountAmount")
+                        .HasColumnType("double");
+
+                    b.Property<double>("DiscountedPrice")
+                        .HasColumnType("double");
+
+                    b.Property<DateTime>("ExpirationDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
+                    b.Property<double>("OriginalPrice")
+                        .HasColumnType("double");
+
+                    b.Property<string>("StoreOwnerId")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DiscountedItems");
+                });
+
             modelBuilder.Entity("FullStackAuth_WebAPI.Models.UserFoodItem", b =>
                 {
                     b.Property<int>("Id")
@@ -97,13 +126,13 @@ namespace FullStackAuth_WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3af538d8-1134-4f19-95a9-066a0b5ca1e9",
+                            Id = "23bfa8e6-acf0-411b-9268-de9bf802c9b7",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "9584fd30-c98a-433f-9bee-d75136173ade",
+                            Id = "043d3af1-ab1d-490f-94d9-d6c7ac8aca36",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

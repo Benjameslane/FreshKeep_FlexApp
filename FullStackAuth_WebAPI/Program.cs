@@ -42,6 +42,15 @@ namespace FullStackAuth_WebAPI
             string spoonacularApiKey ="4cb8d788dff14192aeeb7619916f5365";
 
             builder.Services.AddScoped(provider => new SpoonacularService(spoonacularApiKey));
+            var roles = new[] { "StoreOwner", "Environmentalist" };
+
+            builder.Services.AddAuthorization(options =>
+            {
+                foreach (var role in roles)
+                {
+                    options.AddPolicy(role, policy => policy.RequireRole(role));
+                }
+            });
 
 
 

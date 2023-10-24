@@ -30,6 +30,9 @@ namespace FullStackAuth_WebAPI.Controllers
         {
             var user = _mapper.Map<User>(userForRegistration);
 
+            // Set the IsStoreOwner property based on the selected role
+            user.IsStoreOwner = userForRegistration.Role == "Store Owner";
+
             var result = await _userManager.CreateAsync(user, userForRegistration.Password);
 
             if (!result.Succeeded)
@@ -40,8 +43,6 @@ namespace FullStackAuth_WebAPI.Controllers
                 }
                 return BadRequest(ModelState);
             }
-
-           
 
             UserForDisplayDto createdUser = new UserForDisplayDto
             {
@@ -55,6 +56,7 @@ namespace FullStackAuth_WebAPI.Controllers
 
             return StatusCode(201, createdUser);
         }
+
 
         [HttpPost("login")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
